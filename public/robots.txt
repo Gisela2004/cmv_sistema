@@ -1,0 +1,4 @@
+# robots.txt para CMV Asesoría y Capacitación México
+User-agent: *
+Allow: /
+
