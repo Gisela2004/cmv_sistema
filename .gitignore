@@ -1,0 +1,24 @@
+# Archivos de XAMPP
+applications.html
+bitnami.css
+favicon.ico
+index.php
+webalizer/
+xampp/
+dashboard/
+img/
+cgi-bin/
+
+# Archivos temporales
+*.log
+*.tmp
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+
+# Carpetas del sistema
+vendor/
+node_modules/
+.idea/
+.vscode/
