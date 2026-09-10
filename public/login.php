@@ -131,13 +131,13 @@ if (isset($_SESSION['id_usuario'])) {
         <div class="mb-3 text-start">
             <label for="password" class="form-label fw-semibold" style="color: #0B2D4F;">Contraseña</label>
             <input type="password" class="form-control" id="password" name="password" 
-                   placeholder="admin123" required>
+                   placeholder="admin23" required>
         </div>
         <button type="submit" class="btn-cmv">Ingresar al sistema</button>
     </form>
 
     <div class="footer-login">
-        <p>Usuario de prueba: <strong>admin@cmv.com</strong><br>Contraseña: <strong>admin123</strong></p>
+        <p>Usuario de prueba: <strong>admin@cmv.com</strong><br>Contraseña: <strong>admin23</strong></p>
         <p style="margin-top: 10px;">&copy; 2026 CMV Asesoría y Capacitación</p>
     </div>
 </div>

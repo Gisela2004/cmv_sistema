@@ -111,7 +111,7 @@ $total_certificados = $stmt->fetch()['total'];
         <div class="col-md-10 content">
             <div class="header d-flex justify-content-between align-items-center">
                 <div>
-                    <h4 class="welcome-text">👋 ¡Bienvenido, <?= htmlspecialchars($nombre) ?>!</h4>
+                    <h4 class="welcome-text"> ¡Bienvenido, <?= htmlspecialchars($nombre) ?>!</h4>
                     <p class="text-muted mb-0">Panel de administración de CMV</p>
                 </div>
                 <div>
@@ -148,7 +148,7 @@ $total_certificados = $stmt->fetch()['total'];
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card-dashboard text-start p-4">
-                        <h5 style="color: #0B2D4F;">📌 Resumen del sistema</h5>
+                        <h5 style="color: #0B2D4F;"> Resumen del sistema</h5>
                         <p class="text-muted mb-0">
                             Este panel te permite administrar los cursos, usuarios y certificados de CMV. 
                             Usa el menú lateral para navegar entre las diferentes secciones.

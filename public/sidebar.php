@@ -70,13 +70,20 @@ $pagina_actual = basename($_SERVER['PHP_SELF']);
     <div class="logo">
         <img src="img/Imagen1.png" alt="Logo CMV">
     </div>
-    
-    <a href="dashboard.php" class="<?php echo ($pagina_actual == 'dashboard.php') ? 'active' : ''; ?>"><i class="fas fa-home"></i> Inicio</a>
+        <a href="dashboard.php" class="<?php echo ($pagina_actual == 'dashboard.php') ? 'active' : ''; ?>"><i class="fas fa-home"></i> Inicio</a>
     <a href="cursos.php" class="<?php echo ($pagina_actual == 'cursos.php') ? 'active' : ''; ?>"><i class="fas fa-book"></i> Cursos</a>
-    <a href="usuarios.php" class="<?php echo ($pagina_actual == 'usuarios.php') ? 'active' : ''; ?>"><i class="fas fa-users"></i> Usuarios</a>
+    
+    <?php if ($_SESSION['rol'] == 'admin'): ?>
+        <a href="usuarios.php" class="<?php echo ($pagina_actual == 'usuarios.php') ? 'active' : ''; ?>"><i class="fas fa-users"></i> Usuarios</a>
+    <?php endif; ?>
+    
     <a href="certificados.php" class="<?php echo ($pagina_actual == 'certificados.php') ? 'active' : ''; ?>"><i class="fas fa-certificate"></i> Certificados</a>
     <a href="eventos.php" class="<?php echo ($pagina_actual == 'eventos.php') ? 'active' : ''; ?>"><i class="fas fa-calendar-alt"></i> Eventos</a>
     
+    <!-- Separador visual -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;"></div>
+    
+    <a href="mi_perfil.php" class="<?php echo ($pagina_actual == 'mi_perfil.php') ? 'active' : ''; ?>"><i class="fas fa-user-circle"></i> Mi Perfil</a>
     <div class="logout">
         <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     </div>
