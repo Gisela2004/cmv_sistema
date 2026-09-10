@@ -1,5 +1,8 @@
 <?php
 // config/database.php
+
+// Define la URL base de tu proyecto (ajusta la ruta si tu carpeta se llama diferente)
+define('BASE_URL', 'http://localhost/cmv_sistema/public/');
 $host = 'localhost';
 $dbname = 'cmv_sistema';
 $user = 'root';

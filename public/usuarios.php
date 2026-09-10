@@ -132,18 +132,7 @@ if (isset($_GET['error'])) {
 <body>
 <div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-2 sidebar d-none d-md-block">
-            <div class="logo"> CMV Asesoria Y Capacitación</div>
-            <a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a>
-            <a href="cursos.php"><i class="fas fa-book"></i> Cursos</a>
-            <a href="usuarios.php" class="active"><i class="fas fa-users"></i> Usuarios</a>
-            <a href="certificados.php"><i class="fas fa-certificate"></i> Certificados</a>
-            <a href="eventos.php"><i class="fas fa-calendar-alt"></i> Eventos</a>
-            <div class="logout">
-                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-            </div>
-        </div>
+    <?php include 'sidebar.php'; ?>
 
         <!-- Contenido -->
         <div class="col-md-10 content">
@@ -163,8 +152,7 @@ if (isset($_GET['error'])) {
             <!-- Tabla de usuarios -->
             <?php if (count($usuarios) > 0): ?>
                 <div class="table-responsive table-usuarios">
-                    <table class="table table-hover mb-0">
-                        <thead>
+<table class="table table-hover mb-0" style="min-width: 800px;">                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>

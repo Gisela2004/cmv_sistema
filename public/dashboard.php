@@ -43,70 +43,10 @@ $total_certificados = $stmt->fetch()['total'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* Estilos del dashboard respetando los colores de CMV */
+        /* Estilos EXCLUSIVOS del dashboard (Ya no incluimos los del sidebar aquí) */
         body {
             background-color: #F4F6F9;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .sidebar {
-            background-color: #0B2D4F;
-            min-height: 100vh;
-            padding: 20px 15px;
-            color: white;
-        }
-        .sidebar .logo {
-            text-align: center;
-            padding: 10px 0 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 20px;
-        }
-        .sidebar .logo img {
-            max-width: 120px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
-        .sidebar .logo .nombre-empresa {
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            display: block;
-            margin-top: 8px;
-            line-height: 1.4;
-        }
-        .sidebar a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            padding: 12px 15px;
-            margin: 5px 0;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        .sidebar a:hover {
-            background-color: rgba(255,255,255,0.1);
-            color: white;
-        }
-        .sidebar a.active {
-            background-color: rgba(255,255,255,0.15);
-            color: white;
-        }
-        .sidebar a i {
-            margin-right: 12px;
-            width: 20px;
-            text-align: center;
-        }
-        .sidebar .logout {
-            margin-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 15px;
-        }
-        .sidebar .logout a {
-            color: #ff7f7f;
-        }
-        .sidebar .logout a:hover {
-            background-color: rgba(255,127,127,0.1);
         }
         .content {
             padding: 30px;
@@ -163,20 +103,10 @@ $total_certificados = $stmt->fetch()['total'];
 <body>
 <div class="container-fluid">
     <div class="row">
-     <!-- Sidebar -->
-<div class="col-md-2 sidebar d-none d-md-block">
-    <div class="logo" style="text-align: center; padding: 15px 10px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px;">
-        <img src="assets/img/Imagen1.png" alt="CMV" style="max-width: 160px; height: auto; display: block; margin: 0 auto; border-radius: 8px;">
-    </div>
-    <a href="dashboard.php" class="active"><i class="fas fa-home"></i> Inicio</a>
-    <a href="usuarios.php"><i class="fas fa-users"></i> Usuarios</a>
-    <a href="cursos.php"><i class="fas fa-book"></i> Cursos</a>
-    <a href="certificados.php"><i class="fas fa-certificate"></i> Certificados</a>
-    <a href="eventos.php"><i class="fas fa-calendar-alt"></i> Eventos</a>
-    <div class="logout">
-        <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-    </div>
-</div>
+        
+        <!-- AQUÍ LLAMAMOS AL SIDEBAR CORREGIDO -->
+        <?php include 'sidebar.php'; ?>
+
         <!-- Contenido -->
         <div class="col-md-10 content">
             <div class="header d-flex justify-content-between align-items-center">

@@ -17,33 +17,12 @@ $eventos = $stmt->fetchAll();
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Eventos - CMV Asesoría Y  Capacitacio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Eventos - CMV Asesoría Y Capacitación</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .sidebar {
-            background-color: #0B2D4F;
-            min-height: 100vh;
-            padding: 20px 15px;
-            color: white;
-        }
-        .sidebar .logo { font-size: 24px; font-weight: 700; text-align: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; }
-        .sidebar a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            display: block;
-            padding: 12px 15px;
-            margin: 5px 0;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        .sidebar a:hover { background-color: rgba(255,255,255,0.1); color: white; }
-        .sidebar a.active { background-color: rgba(255,255,255,0.15); color: white; }
-        .sidebar a i { margin-right: 12px; width: 20px; text-align: center; }
-        .sidebar .logout { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px; }
-        .sidebar .logout a { color: #ff7f7f; }
         .content { padding: 30px; }
         .header {
             background: white;
@@ -65,6 +44,29 @@ $eventos = $stmt->fetchAll();
             transition: all 0.3s ease;
         }
         .btn-cmv:hover { background-color: #1a4b7a; color: white; }
+        
+        /* --- CSS PARA BOTONES DE ACCIÓN (Igual que cursos) --- */
+        .btn-cmv-eliminar {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        .btn-cmv-eliminar:hover { background-color: #c82333; color: white; }
+        .btn-cmv-editar {
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+        .btn-cmv-editar:hover { background-color: #e0a800; color: #333; }
+        
         .table-eventos {
             background: white;
             border-radius: 12px;
@@ -87,18 +89,7 @@ $eventos = $stmt->fetchAll();
 <body>
 <div class="container-fluid">
     <div class="row">
-        <!-- Sidebar -->
-        <div class="col-md-2 sidebar d-none d-md-block">
-            <div class="logo">CMV</div>
-            <a href="dashboard.php"><i class="fas fa-home"></i> Inicio</a>
-            <a href="cursos.php"><i class="fas fa-book"></i> Cursos</a>
-            <a href="usuarios.php"><i class="fas fa-users"></i> Usuarios</a>
-            <a href="certificados.php"><i class="fas fa-certificate"></i> Certificados</a>
-            <a href="eventos.php" class="active"><i class="fas fa-calendar-alt"></i> Eventos</a>
-            <div class="logout">
-                <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-            </div>
-        </div>
+       <?php include 'sidebar.php'; ?>
 
         <div class="col-md-10 content">
             <div class="header">
@@ -133,9 +124,14 @@ $eventos = $stmt->fetchAll();
                                     <td><span class="fecha-evento"><?= date('d/m/Y', strtotime($evento['fecha_evento'])) ?></span></td>
                                     <td><?= htmlspecialchars($evento['lugar']) ?></td>
                                     <td>
-                                        <a href="evento_editar.php?id=<?= $evento['id_evento'] ?>" class="btn btn-warning btn-sm">Editar</a>
+                                        <!-- BOTONES CORREGIDOS A SOLO ÍCONOS -->
+                                        <a href="evento_editar.php?id=<?= $evento['id_evento'] ?>" class="btn btn-cmv-editar">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         <?php if ($_SESSION['rol'] == 'admin'): ?>
-                                            <a href="evento_eliminar.php?id=<?= $evento['id_evento'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar este evento?')">Eliminar</a>
+                                            <a href="evento_eliminar.php?id=<?= $evento['id_evento'] ?>" class="btn btn-cmv-eliminar" onclick="return confirm('¿Eliminar este evento?')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
