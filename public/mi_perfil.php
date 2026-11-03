@@ -105,9 +105,20 @@ if (isset($_GET['error'])) {
                         </div>
                         <h5 class="mb-1" style="border: none; padding: 0;"><?= htmlspecialchars($usuario['nombre']) ?></h5>
                         <p class="text-muted mb-3"><?= htmlspecialchars($usuario['email']) ?></p>
+                        
+                        <!-- CORRECCIÓN 1: Detectar los 3 roles en la etiqueta -->
                         <span class="info-badge">
-                            <?= ($usuario['rol'] == 'admin') ? ' Administrador' : ' Editor' ?>
+                            <?php 
+                                if ($usuario['rol'] == 'admin') {
+                                    echo 'Administrador';
+                                } elseif ($usuario['rol'] == 'editor') {
+                                    echo 'Editor';
+                                } else {
+                                    echo 'Usuario';
+                                }
+                            ?>
                         </span>
+
                         <hr style="margin: 20px 0;">
                         <div class="text-start">
                             <div class="info-item">
@@ -143,8 +154,17 @@ if (isset($_GET['error'])) {
 
                             <div class="mb-3">
                                 <label class="form-label">Rol</label>
+                                <!-- CORRECCIÓN 2: Detectar los 3 roles en el campo de texto -->
                                 <input type="text" class="form-control" 
-                                       value="<?= ($usuario['rol'] == 'admin') ? 'Administrador' : 'Editor' ?>" disabled>
+                                       value="<?php 
+                                           if ($usuario['rol'] == 'admin') {
+                                               echo 'Administrador';
+                                           } elseif ($usuario['rol'] == 'editor') {
+                                               echo 'Editor';
+                                           } else {
+                                               echo 'Usuario';
+                                           }
+                                       ?>" disabled>
                                 <small class="text-muted">El rol solo puede ser cambiado por un administrador.</small>
                             </div>
 

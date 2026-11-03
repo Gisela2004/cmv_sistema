@@ -2,7 +2,7 @@
 // public/curso_agregar.php - Formulario para agregar curso
 session_start();
 
-if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] !== 'admin') {
+if (!isset($_SESSION['id_usuario']) || ($_SESSION['rol'] !== 'admin' && $_SESSION['rol'] !== 'editor')) {
     header("Location: login.php");
     exit();
 }
@@ -15,17 +15,16 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] !== 'admin') {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .container { max-width: 700px; margin: 50px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .container { max-width: 800px; margin: 50px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .btn-cmv { background-color: #0B2D4F; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; }
         .btn-cmv:hover { background-color: #1a4b7a; color: white; }
         .btn-cmv-secondary { background-color: #6c757d; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; }
-        .btn-cmv-secondary:hover { background-color: #5a6268; color: white; }
         .required { color: red; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2 style="color: #0B2D4F;"> Agregar Nuevo Curso</h2>
+    <h2 style="color: #0B2D4F;">➕ Agregar Nuevo Curso</h2>
     <hr>
     <?php if (isset($_GET['error'])): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($_GET['error']) ?></div>
@@ -39,15 +38,22 @@ if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] !== 'admin') {
             <label class="form-label fw-semibold">Descripción</label>
             <textarea class="form-control" name="descripcion" rows="4" placeholder="Describe el contenido del curso"></textarea>
         </div>
+        
+        <!-- AQUÍ ESTÁN LOS DOS CAMPOS DE DURACIÓN -->
         <div class="row">
             <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Duración</label>
-                <input type="text" class="form-control" name="duracion" placeholder="Ej: 40 horas">
+                <label class="form-label fw-semibold">Duración en Línea</label>
+                <input type="text" class="form-control" name="duracion_online" placeholder="Ej: 20 horas">
             </div>
             <div class="col-md-6 mb-3">
-                <label class="form-label fw-semibold">Precio (MXN)</label>
-                <input type="number" class="form-control" name="precio" step="0.01" placeholder="0.00">
+                <label class="form-label fw-semibold">Duración Presencial</label>
+                <input type="text" class="form-control" name="duracion_presencial" placeholder="Ej: 40 horas">
             </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Precio (MXN)</label>
+            <input type="number" class="form-control" name="precio" step="0.01" placeholder="0.00">
         </div>
         <div class="mb-3">
             <label class="form-label fw-semibold">Imagen</label>

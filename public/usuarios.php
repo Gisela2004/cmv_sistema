@@ -126,6 +126,7 @@ if (isset($_GET['error'])) {
         .table-usuarios tr:hover { background-color: #f8f9fa; }
         .badge-admin { background-color: #0B2D4F; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
         .badge-editor { background-color: #28a745; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+        .badge-usuario { background-color: #6c757d; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; }
         .sin-usuarios { text-align: center; padding: 60px 20px; color: #999; }
     </style>
 </head>
@@ -152,7 +153,8 @@ if (isset($_GET['error'])) {
             <!-- Tabla de usuarios -->
             <?php if (count($usuarios) > 0): ?>
                 <div class="table-responsive table-usuarios">
-<table class="table table-hover mb-0" style="min-width: 800px;">                        <thead>
+                    <table class="table table-hover mb-0" style="min-width: 800px;">
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
@@ -171,8 +173,10 @@ if (isset($_GET['error'])) {
                                     <td>
                                         <?php if ($usuario['rol'] == 'admin'): ?>
                                             <span class="badge-admin">Administrador</span>
-                                        <?php else: ?>
+                                        <?php elseif ($usuario['rol'] == 'editor'): ?>
                                             <span class="badge-editor">Editor</span>
+                                        <?php else: ?>
+                                            <span class="badge-usuario">Usuario</span>
                                         <?php endif; ?>
                                     </td>
                                     <td><?= date('d/m/Y', strtotime($usuario['fecha_registro'])) ?></td>

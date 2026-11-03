@@ -1,8 +1,8 @@
 <?php
-// public/curso_actualizar.php - Actualizar curso en la BD
+// public/curso_actualizar.php
 session_start();
 
-if (!isset($_SESSION['id_usuario']) || $_SESSION['rol'] !== 'admin') {
+if (!isset($_SESSION['id_usuario']) || ($_SESSION['rol'] !== 'admin' && $_SESSION['rol'] !== 'editor')) {
     header("Location: login.php");
     exit();
 }
@@ -12,7 +12,8 @@ require_once '../config/database.php';
 $id = intval($_POST['id'] ?? 0);
 $titulo = trim($_POST['titulo'] ?? '');
 $descripcion = trim($_POST['descripcion'] ?? '');
-$duracion = trim($_POST['duracion'] ?? '');
+$duracion_online = trim($_POST['duracion_online'] ?? '');
+$duracion_presencial = trim($_POST['duracion_presencial'] ?? '');
 $precio = floatval($_POST['precio'] ?? 0);
 
 if ($id <= 0 || empty($titulo)) {
@@ -20,13 +21,11 @@ if ($id <= 0 || empty($titulo)) {
     exit();
 }
 
-// Obtener imagen actual
 $stmt = $pdo->prepare("SELECT imagen FROM cursos WHERE id_curso = ?");
 $stmt->execute([$id]);
 $cursoActual = $stmt->fetch();
 $nombreImagen = $cursoActual['imagen'] ?? '';
 
-// Procesar nueva imagen si se sube
 if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
     $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
     $nombreImagen = uniqid('curso_') . '.' . $extension;
@@ -36,22 +35,18 @@ if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
         mkdir('../public/assets/img', 0777, true);
     }
     
-    if (!move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino)) {
-        header("Location: curso_editar.php?id=$id&error=Error al subir la imagen");
-        exit();
-    }
+    move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
 }
 
 try {
-    $stmt = $pdo->prepare("UPDATE cursos 
-                           SET titulo = ?, descripcion = ?, imagen = ?, duracion = ?, precio = ? 
-                           WHERE id_curso = ?");
-    $stmt->execute([$titulo, $descripcion, $nombreImagen, $duracion, $precio, $id]);
+    // Actualizamos las dos duraciones
+    $stmt = $pdo->prepare("UPDATE cursos SET titulo = ?, descripcion = ?, imagen = ?, duracion_online = ?, duracion_presencial = ?, precio = ? WHERE id_curso = ?");
+    $stmt->execute([$titulo, $descripcion, $nombreImagen, $duracion_online, $duracion_presencial, $precio, $id]);
     
     header("Location: cursos.php?success=Curso actualizado correctamente");
     exit();
 } catch (PDOException $e) {
-    header("Location: curso_editar.php?id=$id&error=Error al actualizar: " . $e->getMessage());
+    header("Location: curso_editar.php?id=$id&error=Error: " . $e->getMessage());
     exit();
 }
 ?>

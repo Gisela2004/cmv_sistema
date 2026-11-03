@@ -65,25 +65,67 @@ $pagina_actual = basename($_SERVER['PHP_SELF']);
     <i class="fas fa-bars"></i> Menú
 </div>
 
-<!-- Menú lateral (SIN las clases d-none ni d-md-block para evitar conflictos) -->
+<!-- Menú lateral -->
 <div class="col-md-2 sidebar" id="menuLateral">
     <div class="logo">
         <img src="img/Imagen1.png" alt="Logo CMV">
     </div>
-        <a href="dashboard.php" class="<?php echo ($pagina_actual == 'dashboard.php') ? 'active' : ''; ?>"><i class="fas fa-home"></i> Inicio</a>
-    <a href="cursos.php" class="<?php echo ($pagina_actual == 'cursos.php') ? 'active' : ''; ?>"><i class="fas fa-book"></i> Cursos</a>
     
-    <?php if ($_SESSION['rol'] == 'admin'): ?>
-        <a href="usuarios.php" class="<?php echo ($pagina_actual == 'usuarios.php') ? 'active' : ''; ?>"><i class="fas fa-users"></i> Usuarios</a>
+    <!-- INICIO: Visible para todos -->
+    <a href="dashboard.php" class="<?php echo ($pagina_actual == 'dashboard.php') ? 'active' : ''; ?>">
+        <i class="fas fa-home"></i> Inicio
+    </a>
+
+    <!-- CURSOS: Visible para todos -->
+    <a href="cursos.php" class="<?php echo ($pagina_actual == 'cursos.php') ? 'active' : ''; ?>">
+        <i class="fas fa-book"></i> Cursos
+    </a>
+
+       <!-- MIS CURSOS: Solo visible para los alumnos (rol usuario) -->
+    <?php if ($_SESSION['rol'] == 'usuario'): ?>
+        <a href="mis_cursos.php" class="<?php echo ($pagina_actual == 'mis_cursos.php' || $pagina_actual == 'aula_curso.php') ? 'active' : ''; ?>">
+            <i class="fas fa-graduation-cap"></i> Mis Cursos
+        </a>
     <?php endif; ?>
     
-    <a href="certificados.php" class="<?php echo ($pagina_actual == 'certificados.php') ? 'active' : ''; ?>"><i class="fas fa-certificate"></i> Certificados</a>
-    <a href="eventos.php" class="<?php echo ($pagina_actual == 'eventos.php') ? 'active' : ''; ?>"><i class="fas fa-calendar-alt"></i> Eventos</a>
+    <!-- USUARIOS: Solo visible para Admin -->
+    <?php if ($_SESSION['rol'] == 'admin'): ?>
+        <a href="usuarios.php" class="<?php echo ($pagina_actual == 'usuarios.php') ? 'active' : ''; ?>">
+            <i class="fas fa-users"></i> Usuarios
+        </a>
+    <?php endif; ?>
+
+    <!-- INSCRIPCIONES: Solo visible para Admin y Editor -->
+    <?php if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'editor'): ?>
+        <a href="inscripciones_admin.php" class="<?php echo ($pagina_actual == 'inscripciones_admin.php') ? 'active' : ''; ?>">
+            <i class="fas fa-receipt"></i> Inscripciones
+        </a>
+    <?php endif; ?>
+
+    <?php if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'editor'): ?>
+        <a href="materiales_admin.php" class="<?php echo ($pagina_actual == 'materiales_admin.php') ? 'active' : ''; ?>">
+            <i class="fas fa-folder-open"></i> Materiales
+        </a>
+    <?php endif; ?>
+
+    <!-- CERTIFICADOS: Visible para todos -->
+    <a href="certificados.php" class="<?php echo ($pagina_actual == 'certificados.php') ? 'active' : ''; ?>">
+        <i class="fas fa-certificate"></i> Certificados
+    </a>
+
+    <!-- EVENTOS: Visible para todos -->
+    <a href="eventos.php" class="<?php echo ($pagina_actual == 'eventos.php') ? 'active' : ''; ?>">
+        <i class="fas fa-calendar-alt"></i> Eventos
+    </a>
     
     <!-- Separador visual -->
     <div style="border-top: 1px solid rgba(255,255,255,0.1); margin: 15px 0;"></div>
     
-    <a href="mi_perfil.php" class="<?php echo ($pagina_actual == 'mi_perfil.php') ? 'active' : ''; ?>"><i class="fas fa-user-circle"></i> Mi Perfil</a>
+    <!-- MI PERFIL: Visible para todos -->
+    <a href="mi_perfil.php" class="<?php echo ($pagina_actual == 'mi_perfil.php') ? 'active' : ''; ?>">
+        <i class="fas fa-user-circle"></i> Mi Perfil
+    </a>
+    
     <div class="logout">
         <a href="logout.php"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     </div>
